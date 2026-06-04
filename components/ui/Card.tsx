@@ -1,4 +1,9 @@
-import { createElement, type ElementType, type ReactNode } from "react";
+import {
+  createElement,
+  type ComponentPropsWithoutRef,
+  type ElementType,
+  type ReactNode,
+} from "react";
 import { cn } from "@/lib/utils";
 
 type CardVariant = "surface" | "glass" | "outline";
@@ -20,7 +25,7 @@ const PADDING: Record<CardPadding, string> = {
   lg: "p-8",
 };
 
-interface CardProps {
+type CardProps<E extends ElementType> = {
   children: ReactNode;
   className?: string;
   variant?: CardVariant;
@@ -30,24 +35,33 @@ interface CardProps {
    * border warms to accent — reads as "inspecting a system node".
    */
   interactive?: boolean;
-  as?: ElementType;
-}
+  as?: E;
+} & Omit<
+  ComponentPropsWithoutRef<E>,
+  "as" | "children" | "className" | "variant" | "padding" | "interactive"
+>;
 
 /**
  * Surface primitive. The base for architecture cards, system nodes,
  * metadata panels — never a generic content box. Composes with any
  * children; bring your own internal layout.
+ *
+ * Generic over the rendered element so a card rendered as <a>/<button>
+ * keeps its element-specific props (href, onClick, …) typed and
+ * forwarded via rest.
  */
-export function Card({
+export function Card<E extends ElementType = "div">({
   children,
   className,
   variant = "surface",
   padding = "md",
   interactive = false,
-  as = "div",
-}: CardProps) {
+  as,
+  ...rest
+}: CardProps<E>) {
+  const Tag: ElementType = as ?? "div";
   return createElement(
-    as,
+    Tag,
     {
       className: cn(
         "rounded-card",
@@ -57,6 +71,7 @@ export function Card({
           "group transition-[transform,border-color,box-shadow] duration-[var(--duration-base)] ease-[var(--ease-out)] hover:-translate-y-0.5 hover:border-border-accent hover:shadow-raised",
         className,
       ),
+      ...rest,
     },
     children,
   );

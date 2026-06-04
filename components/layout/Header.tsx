@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
@@ -10,7 +11,7 @@ import { DURATION, EASE } from "@/lib/motion";
 
 function Wordmark() {
   return (
-    <a
+    <Link
       href="/"
       className="group inline-flex items-center gap-2.5"
       aria-label="Sravan Mummareddy — home"
@@ -22,7 +23,7 @@ function Wordmark() {
       <span className="text-sm font-medium tracking-tight text-text-primary">
         Sravan Mummareddy
       </span>
-    </a>
+    </Link>
   );
 }
 

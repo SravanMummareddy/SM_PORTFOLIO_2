@@ -1,30 +1,47 @@
-import { createElement, type ElementType, type ReactNode } from "react";
+import {
+  createElement,
+  type ComponentPropsWithoutRef,
+  type ElementType,
+  type ReactNode,
+} from "react";
 import { cn } from "@/lib/utils";
 
 /*
-  Polymorphic text primitives. Rendered through createElement so the
-  `as` prop stays well-typed even with React Three Fiber's global JSX
-  augmentation active elsewhere in the app.
+  Polymorphic text primitives. Each is generic over the rendered
+  element so element-specific props are typed and forwarded via rest,
+  and each renders through createElement to stay compatible with React
+  Three Fiber's global JSX augmentation.
 */
 
-interface BaseTextProps {
+type TextOwnProps<E extends ElementType> = {
   children: ReactNode;
   className?: string;
-  as?: ElementType;
-}
+  as?: E;
+};
+
+type PolymorphicTextProps<E extends ElementType, Extra extends string = never> =
+  TextOwnProps<E> &
+    Omit<ComponentPropsWithoutRef<E>, "as" | "children" | "className" | Extra>;
 
 /**
  * Display — the oversized hero statement. One per view, maximum.
  * Pairs the fluid `text-display` scale with balanced wrapping.
  */
-export function Display({ children, className, as = "h1" }: BaseTextProps) {
+export function Display<E extends ElementType = "h1">({
+  children,
+  className,
+  as,
+  ...rest
+}: PolymorphicTextProps<E>) {
+  const Tag: ElementType = as ?? "h1";
   return createElement(
-    as,
+    Tag,
     {
       className: cn(
         "text-display font-sans text-text-primary text-balance",
         className,
       ),
+      ...rest,
     },
     children,
   );
@@ -38,30 +55,30 @@ const HEADING_SIZE: Record<HeadingLevel, string> = {
   3: "text-h3",
 };
 
-interface HeadingProps extends BaseTextProps {
+/** Section and subsection headings. */
+export function Heading<E extends ElementType = "h2">({
+  children,
+  className,
+  level = 2,
+  as,
+  ...rest
+}: PolymorphicTextProps<E, "level"> & {
   /** Visual + semantic level. Override the tag with `as` if needed. */
   level?: HeadingLevel;
-}
-
-/** Section and subsection headings. */
-export function Heading({ children, className, level = 2, as }: HeadingProps) {
-  const tag = as ?? (`h${level}` as ElementType);
+}) {
+  const Tag: ElementType = as ?? (`h${level}` as ElementType);
   return createElement(
-    tag,
+    Tag,
     {
       className: cn(
         HEADING_SIZE[level],
         "font-sans text-text-primary text-balance",
         className,
       ),
+      ...rest,
     },
     children,
   );
-}
-
-interface TextProps extends BaseTextProps {
-  /** Muted secondary for supporting copy, faint for metadata. */
-  tone?: "primary" | "secondary" | "tertiary";
 }
 
 const TEXT_TONE = {
@@ -71,61 +88,75 @@ const TEXT_TONE = {
 } as const;
 
 /** Body copy. Default tone is secondary — calm, readable, restrained. */
-export function Text({
+export function Text<E extends ElementType = "p">({
   children,
   className,
   tone = "secondary",
-  as = "p",
-}: TextProps) {
+  as,
+  ...rest
+}: PolymorphicTextProps<E, "tone"> & {
+  /** Muted secondary for supporting copy, faint for metadata. */
+  tone?: "primary" | "secondary" | "tertiary";
+}) {
+  const Tag: ElementType = as ?? "p";
   return createElement(
-    as,
+    Tag,
     {
       className: cn(
         "font-sans text-base leading-7 text-pretty",
         TEXT_TONE[tone],
         className,
       ),
+      ...rest,
     },
     children,
   );
 }
 
 /** Lead — the larger intro paragraph that sits under a Display/Heading. */
-export function Lead({ children, className, as = "p" }: BaseTextProps) {
+export function Lead<E extends ElementType = "p">({
+  children,
+  className,
+  as,
+  ...rest
+}: PolymorphicTextProps<E>) {
+  const Tag: ElementType = as ?? "p";
   return createElement(
-    as,
+    Tag,
     {
       className: cn(
         "text-lead font-sans text-text-secondary text-pretty",
         className,
       ),
+      ...rest,
     },
     children,
   );
-}
-
-interface EyebrowProps extends BaseTextProps {
-  /** Show the leading accent tick — reads as a "system label". */
-  marker?: boolean;
 }
 
 /**
  * Eyebrow — uppercase mono micro-label. The recurring "engineering
  * metadata" voice: section tags, statuses, kicker labels.
  */
-export function Eyebrow({
+export function Eyebrow<E extends ElementType = "span">({
   children,
   className,
   marker = false,
-  as = "span",
-}: EyebrowProps) {
+  as,
+  ...rest
+}: PolymorphicTextProps<E, "marker"> & {
+  /** Show the leading accent tick — reads as a "system label". */
+  marker?: boolean;
+}) {
+  const Tag: ElementType = as ?? "span";
   return createElement(
-    as,
+    Tag,
     {
       className: cn(
         "inline-flex items-center gap-2 text-eyebrow font-mono uppercase text-text-tertiary",
         className,
       ),
+      ...rest,
     },
     marker
       ? createElement("span", {
@@ -140,14 +171,21 @@ export function Eyebrow({
 }
 
 /** MonoLabel — inline technical token (tech names, keys, values). */
-export function MonoLabel({ children, className, as = "span" }: BaseTextProps) {
+export function MonoLabel<E extends ElementType = "span">({
+  children,
+  className,
+  as,
+  ...rest
+}: PolymorphicTextProps<E>) {
+  const Tag: ElementType = as ?? "span";
   return createElement(
-    as,
+    Tag,
     {
       className: cn(
         "font-mono text-[0.8125rem] tracking-tight text-text-secondary",
         className,
       ),
+      ...rest,
     },
     children,
   );

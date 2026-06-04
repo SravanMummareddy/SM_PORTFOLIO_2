@@ -1,8 +1,13 @@
+"use client";
+
+import { useId } from "react";
+
 /*
   Static, dependency-free stand-in for the 3D hero graph.
   Serves three roles: the instant first-paint backdrop beneath the
   lazy scene, the reduced-motion view, and the non-WebGL fallback.
-  Pure SVG — no three, no client JS — so it costs almost nothing.
+  No three — just SVG plus a useId() call so the gradient IDs are
+  unique per instance and can never collide across mounts.
 */
 
 interface Node {
@@ -35,6 +40,11 @@ const EDGES: Array<[number, number]> = [
 ];
 
 export function SystemGraphFallback() {
+  const baseId = useId();
+  const coreId = `${baseId}-core`;
+  const accentId = `${baseId}-accent`;
+  const glowId = `${baseId}-glow`;
+
   return (
     <svg
       aria-hidden
@@ -43,15 +53,15 @@ export function SystemGraphFallback() {
       className="h-full w-full"
     >
       <defs>
-        <radialGradient id="node-core" cx="50%" cy="50%" r="50%">
+        <radialGradient id={coreId} cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor="#eef2f8" />
           <stop offset="100%" stopColor="#9aa6b4" />
         </radialGradient>
-        <radialGradient id="node-accent" cx="50%" cy="50%" r="50%">
+        <radialGradient id={accentId} cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor="#a9c0ff" />
           <stop offset="100%" stopColor="#5e8bff" />
         </radialGradient>
-        <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+        <radialGradient id={glowId} cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor="rgba(94,139,255,0.35)" />
           <stop offset="100%" stopColor="rgba(94,139,255,0)" />
         </radialGradient>
@@ -72,13 +82,13 @@ export function SystemGraphFallback() {
       {NODES.map((n, i) => (
         <g key={i}>
           {n.accent ? (
-            <circle cx={n.x} cy={n.y} r={(n.r ?? 1) * 4} fill="url(#glow)" />
+            <circle cx={n.x} cy={n.y} r={(n.r ?? 1) * 4} fill={`url(#${glowId})`} />
           ) : null}
           <circle
             cx={n.x}
             cy={n.y}
             r={n.r ?? 1}
-            fill={n.accent ? "url(#node-accent)" : "url(#node-core)"}
+            fill={n.accent ? `url(#${accentId})` : `url(#${coreId})`}
           />
         </g>
       ))}

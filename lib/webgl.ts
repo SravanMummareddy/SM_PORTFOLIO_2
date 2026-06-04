@@ -16,6 +16,14 @@ export function isWebGLAvailable(): boolean {
       canvas.getContext("webgl") ||
       canvas.getContext("experimental-webgl");
     cached = Boolean(gl);
+
+    // Probing allocates a real GL context. Release it immediately so we
+    // don't hold one of the browser's limited contexts just to detect.
+    if (gl && "getExtension" in gl) {
+      (gl as WebGLRenderingContext)
+        .getExtension("WEBGL_lose_context")
+        ?.loseContext();
+    }
   } catch {
     cached = false;
   }

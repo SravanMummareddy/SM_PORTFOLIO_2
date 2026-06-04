@@ -25,13 +25,15 @@ export function SystemGraph({ className }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const inView = useInView(containerRef, { margin: "0px 0px -10% 0px" });
 
-  const [canRender3D, setCanRender3D] = useState(false);
+  // `ready` is the single gate for the 3D scene. It only flips true
+  // from the idle/timeout callback, and only after the reduced-motion
+  // and WebGL checks have already passed — so no synchronous setState
+  // runs inside the effect.
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     if (reduceMotion) return;
     if (!isWebGLAvailable()) return;
-    setCanRender3D(true);
 
     // Defer mounting the scene until the main thread is idle so it
     // never competes with the hero's initial render/paint.
@@ -54,7 +56,7 @@ export function SystemGraph({ className }: { className?: string }) {
     };
   }, [reduceMotion]);
 
-  const showScene = canRender3D && ready;
+  const showScene = ready;
 
   return (
     <div

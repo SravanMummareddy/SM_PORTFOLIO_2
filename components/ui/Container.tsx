@@ -1,4 +1,9 @@
-import { createElement, type ElementType, type ReactNode } from "react";
+import {
+  createElement,
+  type ComponentPropsWithoutRef,
+  type ElementType,
+  type ReactNode,
+} from "react";
 import { cn } from "@/lib/utils";
 
 type ContainerWidth = "default" | "narrow" | "wide" | "full";
@@ -10,30 +15,40 @@ const WIDTHS: Record<ContainerWidth, string> = {
   full: "max-w-none",
 };
 
-interface ContainerProps {
+type ContainerProps<E extends ElementType> = {
   children: ReactNode;
   className?: string;
   width?: ContainerWidth;
   /** Render as a different element (e.g. "main", "header"). */
-  as?: ElementType;
-}
+  as?: E;
+} & Omit<
+  ComponentPropsWithoutRef<E>,
+  "as" | "children" | "className" | "width"
+>;
 
 /**
  * Horizontal layout primitive: centers content and applies the
  * consistent page gutter. Owns max-width; never set it ad hoc.
  *
- * Rendered via createElement so the polymorphic `as` prop stays
- * typeable alongside React Three Fiber's global JSX augmentation.
+ * Generic over the rendered element so element-specific props (e.g.
+ * an <a>'s href, an aria attribute) are typed and forwarded via rest.
+ * Rendered through createElement to stay compatible with React Three
+ * Fiber's global JSX augmentation.
  */
-export function Container({
+export function Container<E extends ElementType = "div">({
   children,
   className,
   width = "default",
-  as = "div",
-}: ContainerProps) {
+  as,
+  ...rest
+}: ContainerProps<E>) {
+  const Tag: ElementType = as ?? "div";
   return createElement(
-    as,
-    { className: cn("mx-auto w-full px-6 sm:px-8", WIDTHS[width], className) },
+    Tag,
+    {
+      className: cn("mx-auto w-full px-6 sm:px-8", WIDTHS[width], className),
+      ...rest,
+    },
     children,
   );
 }
