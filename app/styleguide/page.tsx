@@ -17,6 +17,8 @@ import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 export const metadata: Metadata = {
   title: "Design System",
   description: "Foundational design system reference.",
+  // Internal reference surface — keep it out of search indexes.
+  robots: { index: false, follow: false },
 };
 
 export default function StyleguidePage() {

@@ -15,7 +15,7 @@ import { DefinitionList, type DefinitionItem } from "@/components/case-study";
 import { CONTACT } from "@/content/contact";
 
 export const metadata: Metadata = {
-  title: "About — Sravan Mummareddy",
+  title: "About",
   description:
     "Sravan Mummareddy is a Systems Product Engineer building scalable backend systems and intelligent operational platforms — with experience across healthcare systems, enterprise SaaS, utility-scale enterprise systems, and AI-assisted workflows.",
 };
