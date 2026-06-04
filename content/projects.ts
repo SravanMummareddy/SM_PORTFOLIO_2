@@ -33,7 +33,7 @@ export const PROJECTS: ProjectMeta[] = [
   },
   {
     index: "02",
-    slug: "enterprise-document-intelligence",
+    slug: "enterprise-platform",
     name: "Enterprise Document Intelligence",
     kind: "Platform Modernization",
     status: "Enterprise Abstract",
@@ -41,7 +41,7 @@ export const PROJECTS: ProjectMeta[] = [
       "A backend platform modernizing high-volume enterprise document retrieval, archival, and ingestion — event-driven, idempotent, and cache-backed.",
     focus: ["REST APIs", "Object storage", "Idempotency", "Event pipeline", "Caching"],
     glyph: "pipeline",
-    hasCaseStudy: false,
+    hasCaseStudy: true,
   },
   {
     index: "03",
