@@ -1,4 +1,4 @@
-import type { ElementType, ReactNode } from "react";
+import { createElement, type ElementType, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type ContainerWidth = "default" | "narrow" | "wide" | "full";
@@ -21,16 +21,19 @@ interface ContainerProps {
 /**
  * Horizontal layout primitive: centers content and applies the
  * consistent page gutter. Owns max-width; never set it ad hoc.
+ *
+ * Rendered via createElement so the polymorphic `as` prop stays
+ * typeable alongside React Three Fiber's global JSX augmentation.
  */
 export function Container({
   children,
   className,
   width = "default",
-  as: Tag = "div",
+  as = "div",
 }: ContainerProps) {
-  return (
-    <Tag className={cn("mx-auto w-full px-6 sm:px-8", WIDTHS[width], className)}>
-      {children}
-    </Tag>
+  return createElement(
+    as,
+    { className: cn("mx-auto w-full px-6 sm:px-8", WIDTHS[width], className) },
+    children,
   );
 }

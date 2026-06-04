@@ -1,4 +1,4 @@
-import type { ElementType, ReactNode } from "react";
+import { createElement, type ElementType, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type CardVariant = "surface" | "glass" | "outline";
@@ -44,20 +44,20 @@ export function Card({
   variant = "surface",
   padding = "md",
   interactive = false,
-  as: Tag = "div",
+  as = "div",
 }: CardProps) {
-  return (
-    <Tag
-      className={cn(
+  return createElement(
+    as,
+    {
+      className: cn(
         "rounded-card",
         VARIANTS[variant],
         PADDING[padding],
         interactive &&
           "group transition-[transform,border-color,box-shadow] duration-[var(--duration-base)] ease-[var(--ease-out)] hover:-translate-y-0.5 hover:border-border-accent hover:shadow-raised",
         className,
-      )}
-    >
-      {children}
-    </Tag>
+      ),
+    },
+    children,
   );
 }
