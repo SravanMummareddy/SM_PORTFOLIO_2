@@ -65,7 +65,7 @@ export const PROJECTS: ProjectMeta[] = [
       "A modular personal operating system unifying routines, health, notes, and tasks into cross-domain insight — built mobile-first as an installable PWA.",
     focus: ["Modular domains", "Cross-module insight", "PWA", "Data modeling"],
     glyph: "orbit",
-    hasCaseStudy: false,
+    hasCaseStudy: true,
   },
   {
     index: "05",
