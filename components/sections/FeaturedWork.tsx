@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/Card";
 import { Heading, Lead, Text, MonoLabel } from "@/components/ui/Typography";
 import { Reveal } from "@/components/motion/Reveal";
 import { ProjectGlyph, type GlyphVariant } from "./ProjectGlyph";
+import { LuminTrackSequence } from "./LuminTrackSequence";
 
 interface Project {
   index: string;
@@ -150,15 +151,19 @@ export function FeaturedWork() {
                   </span>
                 </div>
 
-                {/* Architecture hint */}
+                {/* Architecture hint — LuminTrack gets the scroll story. */}
                 <Card
                   variant="glass"
                   padding="none"
-                  className="aspect-[16/11] w-full overflow-hidden transition-colors duration-[var(--duration-base)] group-hover:border-border-accent"
+                  className="w-full overflow-hidden transition-colors duration-[var(--duration-base)] group-hover:border-border-accent"
                 >
-                  <div className="h-full w-full p-4">
-                    <ProjectGlyph variant={project.glyph} />
-                  </div>
+                  {project.slug === "lumintrack" ? (
+                    <LuminTrackSequence />
+                  ) : (
+                    <div className="aspect-[16/11] h-full w-full p-4">
+                      <ProjectGlyph variant={project.glyph} />
+                    </div>
+                  )}
                 </Card>
               </a>
             </Reveal>

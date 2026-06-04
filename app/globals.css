@@ -210,6 +210,40 @@
     background-clip: text;
     color: transparent;
   }
+
+  /* System "inspection": on hover/focus a card's schematic comes alive —
+     its accent node breathes and its connections flow. Subtle, not flashy.
+     The global reduced-motion guard disables these automatically. */
+  .pillar-core {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .pillar-card:hover .pillar-core,
+  .pillar-card:focus-within .pillar-core {
+    animation: pillar-pulse 1.8s var(--ease-in-out) infinite;
+  }
+  .pillar-card:hover .pillar-conn,
+  .pillar-card:focus-within .pillar-conn {
+    stroke-dasharray: 5 6;
+    animation: pillar-flow 1.1s linear infinite;
+  }
+
+  @keyframes pillar-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.55;
+      transform: scale(1.18);
+    }
+  }
+  @keyframes pillar-flow {
+    to {
+      stroke-dashoffset: -22;
+    }
+  }
 }
 
 /* ───────────────────── Global reduced-motion guard ──────────────────── */

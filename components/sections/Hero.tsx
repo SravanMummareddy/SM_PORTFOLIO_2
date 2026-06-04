@@ -28,13 +28,15 @@ export function Hero() {
 
       {/* Foreground content */}
       <Container className="relative z-20 flex flex-1 items-center pt-28 pb-24">
-        <Stagger trigger="mount" delay={0.35} gap={0.12} className="max-w-3xl">
+        {/* Entrance beats: graph initializes (3D scene) → eyebrow →
+            headline resolves into focus → lead → CTA. */}
+        <Stagger trigger="mount" delay={0.55} gap={0.16} className="max-w-3xl">
           <StaggerItem>
             <Eyebrow marker className="mb-7 block">
               Systems Product Engineer
             </Eyebrow>
           </StaggerItem>
-          <StaggerItem>
+          <StaggerItem mode="resolve">
             <Display>
               Building scalable backend systems and intelligent operational
               platforms.

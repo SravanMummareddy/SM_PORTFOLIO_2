@@ -5,19 +5,21 @@ import type { ReactNode } from "react";
 import {
   revealVariants,
   settleVariants,
+  resolveVariants,
   fadeVariants,
   viewportOnce,
   DURATION,
   EASE,
 } from "@/lib/motion";
 
-type RevealMode = "rise" | "settle" | "fade";
+type RevealMode = "rise" | "settle" | "fade" | "resolve";
 type RevealTrigger = "inView" | "mount";
 
 const VARIANTS = {
   rise: revealVariants,
   settle: settleVariants,
   fade: fadeVariants,
+  resolve: resolveVariants,
 } as const;
 
 interface RevealProps {

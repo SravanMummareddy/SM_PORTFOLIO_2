@@ -54,6 +54,17 @@ export const revealVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: transitionOut },
 };
 
+/** Fade + rise + de-blur — text "resolving" into focus. For hero lines. */
+export const resolveVariants: Variants = {
+  hidden: { opacity: 0, y: REVEAL_DISTANCE, filter: "blur(12px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: transitionOut,
+  },
+};
+
 /** Fade + scale settle — for cards / panels assembling into place. */
 export const settleVariants: Variants = {
   hidden: { opacity: 0, y: REVEAL_DISTANCE, scale: 0.985 },

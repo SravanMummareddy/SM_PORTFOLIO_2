@@ -49,19 +49,19 @@ function PillarGlyph({ kind }: { kind: PillarKind }) {
       {kind === "platform" ? (
         <g>
           <rect x="8" y="10" width="32" height="8" rx="2" stroke={node} strokeOpacity="0.7" strokeWidth="1.5" />
-          <rect x="8" y="20" width="32" height="8" rx="2" stroke={stroke} strokeOpacity="0.8" strokeWidth="1.5" />
+          <rect className="pillar-core" x="8" y="20" width="32" height="8" rx="2" stroke={stroke} strokeOpacity="0.8" strokeWidth="1.5" />
           <rect x="8" y="30" width="32" height="8" rx="2" stroke={node} strokeOpacity="0.5" strokeWidth="1.5" />
         </g>
       ) : null}
       {kind === "intelligence" ? (
         <g stroke={stroke} strokeWidth="1.5" strokeLinecap="round">
-          <path d="M10 12 H38 L30 24 V36 L18 30 V24 Z" strokeOpacity="0.6" />
-          <circle cx="24" cy="33" r="2.5" fill={stroke} stroke="none" />
+          <path className="pillar-conn" d="M10 12 H38 L30 24 V36 L18 30 V24 Z" strokeOpacity="0.6" />
+          <circle className="pillar-core" cx="24" cy="33" r="2.5" fill={stroke} stroke="none" />
         </g>
       ) : null}
       {kind === "ai" ? (
         <g>
-          <g stroke={stroke} strokeOpacity="0.45" strokeWidth="1.5" strokeLinecap="round">
+          <g className="pillar-conn" stroke={stroke} strokeOpacity="0.45" strokeWidth="1.5" strokeLinecap="round">
             <line x1="12" y1="14" x2="28" y2="24" />
             <line x1="12" y1="34" x2="28" y2="24" />
             <line x1="38" y1="24" x2="28" y2="24" />
@@ -69,7 +69,7 @@ function PillarGlyph({ kind }: { kind: PillarKind }) {
           <circle cx="12" cy="14" r="3" fill={node} />
           <circle cx="12" cy="34" r="3" fill={node} />
           <circle cx="38" cy="24" r="3" fill={node} />
-          <circle cx="28" cy="24" r="4" fill={stroke} />
+          <circle className="pillar-core" cx="28" cy="24" r="4" fill={stroke} />
         </g>
       ) : null}
     </svg>
@@ -97,7 +97,14 @@ export function SystemsIBuild() {
       <Stagger className="mt-14 grid gap-4 md:grid-cols-3" gap={0.1}>
         {PILLARS.map((pillar) => (
           <StaggerItem key={pillar.id} mode="settle">
-            <Card variant="surface" padding="lg" className="flex h-full flex-col">
+            <Card
+              variant="surface"
+              padding="lg"
+              interactive
+              tabIndex={0}
+              aria-label={`${pillar.name} — inspect`}
+              className="pillar-card flex h-full flex-col"
+            >
               <div className="flex items-center justify-between">
                 <PillarGlyph kind={pillar.kind} />
                 <MonoLabel className="text-text-faint">{pillar.id}</MonoLabel>
@@ -109,12 +116,19 @@ export function SystemsIBuild() {
               <ul className="mt-6 flex flex-wrap gap-2 border-t border-border pt-5">
                 {pillar.capabilities.map((cap) => (
                   <li key={cap}>
-                    <MonoLabel className="rounded-control border border-border px-2 py-1 text-text-tertiary">
+                    <MonoLabel className="rounded-control border border-border px-2 py-1 text-text-tertiary transition-colors group-hover:border-border-strong group-focus-within:border-border-strong">
                       {cap}
                     </MonoLabel>
                   </li>
                 ))}
               </ul>
+              <span
+                className="mt-5 inline-flex translate-y-1 items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-text-faint opacity-0 transition-all duration-[var(--duration-base)] ease-[var(--ease-out)] group-hover:translate-y-0 group-hover:text-text-tertiary group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:text-text-tertiary group-focus-within:opacity-100"
+                aria-hidden
+              >
+                <span className="size-1 rounded-full bg-accent" />
+                Inspect system
+              </span>
             </Card>
           </StaggerItem>
         ))}

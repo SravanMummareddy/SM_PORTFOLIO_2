@@ -6,17 +6,19 @@ import {
   staggerContainer,
   revealVariants,
   settleVariants,
+  resolveVariants,
   fadeVariants,
   viewportOnce,
   STAGGER,
 } from "@/lib/motion";
 
-type StaggerMode = "rise" | "settle" | "fade";
+type StaggerMode = "rise" | "settle" | "fade" | "resolve";
 
 const ITEM_VARIANTS = {
   rise: revealVariants,
   settle: settleVariants,
   fade: fadeVariants,
+  resolve: resolveVariants,
 } as const;
 
 interface StaggerProps {
