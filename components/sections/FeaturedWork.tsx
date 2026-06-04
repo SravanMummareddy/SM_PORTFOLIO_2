@@ -2,77 +2,9 @@ import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
 import { Heading, Lead, Text, MonoLabel } from "@/components/ui/Typography";
 import { Reveal } from "@/components/motion/Reveal";
-import { ProjectGlyph, type GlyphVariant } from "./ProjectGlyph";
+import { ProjectGlyph } from "./ProjectGlyph";
 import { LuminTrackSequence } from "./LuminTrackSequence";
-
-interface Project {
-  index: string;
-  slug: string;
-  name: string;
-  kind: string;
-  status: string;
-  positioning: string;
-  focus: string[];
-  glyph: GlyphVariant;
-}
-
-const PROJECTS: Project[] = [
-  {
-    index: "01",
-    slug: "lumintrack",
-    name: "LuminTrack",
-    kind: "Workflow Intelligence Platform",
-    status: "Active Build",
-    positioning:
-      "A state-machine workflow platform for multi-stage operational processes — with an event-sourced activity timeline and RAG search over uploaded documents.",
-    focus: ["State machine", "Event timeline", "RAG search", "WebSockets", "PostgreSQL"],
-    glyph: "workflow",
-  },
-  {
-    index: "02",
-    slug: "enterprise-document-intelligence",
-    name: "Enterprise Document Intelligence",
-    kind: "Platform Modernization",
-    status: "Enterprise Abstract",
-    positioning:
-      "A backend platform modernizing high-volume enterprise document retrieval, archival, and ingestion — event-driven, idempotent, and cache-backed.",
-    focus: ["REST APIs", "Object storage", "Idempotency", "Event pipeline", "Caching"],
-    glyph: "pipeline",
-  },
-  {
-    index: "03",
-    slug: "kgd-erp",
-    name: "KGD ERP",
-    kind: "Manufacturing Operations Platform",
-    status: "Production Beta",
-    positioning:
-      "An operations platform for a real manufacturing business — invoices, payments, ledgers, and inventory modeled as one transactional, auditable system.",
-    focus: ["Ledger consistency", "Payment allocation", "Inventory sync", "Audit logging"],
-    glyph: "ledger",
-  },
-  {
-    index: "04",
-    slug: "cadence-orbit",
-    name: "Cadence Orbit",
-    kind: "Personal Intelligence OS",
-    status: "Experimental System",
-    positioning:
-      "A modular personal operating system unifying routines, health, notes, and tasks into cross-domain insight — built mobile-first as an installable PWA.",
-    focus: ["Modular domains", "Cross-module insight", "PWA", "Data modeling"],
-    glyph: "orbit",
-  },
-  {
-    index: "05",
-    slug: "edgestack",
-    name: "EdgeStack",
-    kind: "Decision Intelligence Platform",
-    status: "Experimental System",
-    positioning:
-      "A behavioral analytics and decision-training platform for high-variance, skill-based environments — versioned APIs, session modeling, and offline sync.",
-    focus: ["Versioned API", "Session modeling", "Offline sync", "Decision scoring"],
-    glyph: "decision",
-  },
-];
+import { PROJECTS, projectHref } from "@/content/projects";
 
 function StatusTag({ children }: { children: string }) {
   return (
@@ -105,7 +37,7 @@ export function FeaturedWork() {
           <li key={project.slug}>
             <Reveal mode="rise">
               <a
-                href={`/projects/${project.slug}`}
+                href={projectHref(project)}
                 className="group grid items-center gap-8 border-b border-border py-12 lg:grid-cols-[1.5fr_1fr] lg:gap-16"
               >
                 <div>
@@ -141,7 +73,7 @@ export function FeaturedWork() {
                   </ul>
 
                   <span className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-text-secondary transition-colors group-hover:text-text-primary">
-                    Read the case study
+                    {project.hasCaseStudy ? "Read the case study" : "View project"}
                     <span
                       aria-hidden
                       className="transition-transform duration-[var(--duration-base)] ease-[var(--ease-out)] group-hover:translate-x-1"
