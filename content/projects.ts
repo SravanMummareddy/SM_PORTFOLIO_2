@@ -77,7 +77,7 @@ export const PROJECTS: ProjectMeta[] = [
       "A behavioral analytics and decision-training platform for high-variance, skill-based environments — versioned APIs, session modeling, and offline sync.",
     focus: ["Versioned API", "Session modeling", "Offline sync", "Decision scoring"],
     glyph: "decision",
-    hasCaseStudy: false,
+    hasCaseStudy: true,
   },
 ];
 
