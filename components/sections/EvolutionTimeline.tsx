@@ -6,43 +6,18 @@ import { Heading, Text, MonoLabel } from "@/components/ui/Typography";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { gsap } from "@/lib/gsap";
 import { useIsomorphicLayoutEffect } from "@/lib/hooks";
+import { EXPERIENCE } from "@/content/experience";
 
-interface Stage {
-  index: string;
-  name: string;
-  detail: string;
-}
-
-const STAGES: Stage[] = [
-  {
-    index: "01",
-    name: "Healthcare Systems",
-    detail:
-      "Imaging and clinical systems where correctness and reliability were non-negotiable.",
-  },
-  {
-    index: "02",
-    name: "Enterprise Infrastructure",
-    detail:
-      "High-volume document and billing platforms — modernization without breaking production.",
-  },
-  {
-    index: "03",
-    name: "Operational Platforms",
-    detail:
-      "ERP and workflow systems that turn real-world operations into structured software.",
-  },
-  {
-    index: "04",
-    name: "AI-Assisted Systems",
-    detail:
-      "Retrieval, agents, and intelligent workflows layered onto operational platforms.",
-  },
-];
+const STAGES = EXPERIENCE.map((entry) => ({
+  index: entry.index,
+  company: entry.company,
+  domain: entry.domain,
+  detail: entry.short,
+}));
 
 /**
  * Experience as a scrolled progression. A connector fills left→right with
- * scroll while each domain resolves in sequence — moving through the
+ * scroll while each role resolves in sequence — moving through the
  * engineering domains rather than listing jobs. Static, fully-revealed
  * fallback under reduced motion.
  */
@@ -77,14 +52,14 @@ export function EvolutionTimeline() {
       {/* Progress connector (desktop) — fills over the columns' top border */}
       <span
         aria-hidden
-        className="evo-fill absolute left-0 top-0 z-10 hidden h-px w-full origin-left bg-accent/70 md:block"
+        className="evo-fill absolute left-0 top-0 z-10 hidden h-px w-full origin-left bg-accent/70 lg:block"
       />
 
       <ScrollReveal
-        className="grid gap-x-6 gap-y-10 md:grid-cols-4"
+        className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-5"
         childSelector=".evo-stage"
         y={20}
-        stagger={0.14}
+        stagger={0.12}
       >
         {STAGES.map((stage, i) => (
           <div key={stage.index} className="evo-stage relative border-t border-border pt-7">
@@ -97,14 +72,17 @@ export function EvolutionTimeline() {
             <div className="flex items-center gap-3">
               <MonoLabel className="text-text-faint">{stage.index}</MonoLabel>
               {i < STAGES.length - 1 ? (
-                <span aria-hidden className="hidden text-text-faint md:inline">
+                <span aria-hidden className="hidden text-text-faint lg:inline">
                   →
                 </span>
               ) : null}
             </div>
-            <Heading level={3} className="mt-3 text-h3">
-              {stage.name}
+            <Heading level={3} className="mt-3 text-h3 lg:text-[1.15rem]">
+              {stage.company}
             </Heading>
+            <MonoLabel className="mt-2 block text-[0.72rem] leading-snug text-accent-strong">
+              {stage.domain}
+            </MonoLabel>
             <Text className="mt-3 text-sm">{stage.detail}</Text>
           </div>
         ))}
