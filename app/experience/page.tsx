@@ -4,6 +4,7 @@ import { Display, Heading, Lead, Text, MonoLabel } from "@/components/ui/Typogra
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/motion/Reveal";
 import { ExperienceJourney } from "@/components/experience";
+import { CONTACT } from "@/content/contact";
 
 export const metadata: Metadata = {
   title: "Experience",
@@ -53,7 +54,7 @@ export default function ExperiencePage() {
             <Button href="/projects" variant="secondary">
               View projects
             </Button>
-            <Button href="/contact" variant="ghost">
+            <Button href={CONTACT.mailto} variant="ghost">
               Get in touch
             </Button>
           </div>

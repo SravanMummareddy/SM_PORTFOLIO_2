@@ -2,8 +2,7 @@ import { Section } from "@/components/ui/Section";
 import { Display, Lead, Eyebrow } from "@/components/ui/Typography";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/motion/Reveal";
-
-const EMAIL = "harisravan9@gmail.com";
+import { CONTACT } from "@/content/contact";
 
 /**
  * Section 7 — the closing statement. Minimal and confident: one line of
@@ -27,7 +26,7 @@ export function ContactClosing() {
           AI-assisted product work.
         </Lead>
         <div className="mt-10 flex flex-wrap items-center gap-3">
-          <Button href={`mailto:${EMAIL}`} variant="primary" size="lg">
+          <Button href={CONTACT.mailto} variant="primary" size="lg">
             Get in touch
           </Button>
           <Button href="/projects" variant="secondary" size="lg">

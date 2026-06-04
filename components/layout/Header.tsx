@@ -69,7 +69,7 @@ export function Header() {
             <div className="hidden items-center gap-2 md:flex">
               <Navigation />
               <span aria-hidden className="mx-2 h-5 w-px bg-border" />
-              <Button href="/contact" variant="secondary" size="sm">
+              <Button href="/about#contact" variant="secondary" size="sm">
                 Contact
               </Button>
             </div>
@@ -104,7 +104,7 @@ export function Header() {
                   onNavigate={() => setMenuOpen(false)}
                 />
                 <Button
-                  href="/contact"
+                  href="/about#contact"
                   variant="secondary"
                   size="md"
                   className="mt-2 w-full"

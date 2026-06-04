@@ -1,11 +1,13 @@
 import { Container } from "@/components/ui/Container";
 import { Eyebrow, Text } from "@/components/ui/Typography";
+import { CONTACT } from "@/content/contact";
 import { Navigation } from "./Navigation";
 
 const SOCIAL_LINKS = [
-  { label: "GitHub", href: "https://github.com" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "Email", href: "mailto:harisravan9@gmail.com" },
+  { label: "GitHub", href: CONTACT.github },
+  { label: "LinkedIn", href: CONTACT.linkedin },
+  { label: "Résumé", href: CONTACT.resume },
+  { label: "Email", href: CONTACT.mailto },
 ] as const;
 
 /**
