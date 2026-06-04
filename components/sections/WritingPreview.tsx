@@ -1,43 +1,12 @@
 import { Section } from "@/components/ui/Section";
 import { Heading, Text, MonoLabel } from "@/components/ui/Typography";
 import { Reveal } from "@/components/motion/Reveal";
-
-interface Note {
-  slug: string;
-  category: string;
-  title: string;
-  teaser: string;
-}
-
-// Placeholder engineering notes — titles are real intent, posts are not written yet.
-const NOTES: Note[] = [
-  {
-    slug: "state-machines-for-workflow-systems",
-    category: "Systems",
-    title: "Designing State Machines for Real Workflow Systems",
-    teaser:
-      "Why strict transitions beat boolean flags once a workflow has more than three states.",
-  },
-  {
-    slug: "modernizing-legacy-enterprise-systems",
-    category: "Engineering",
-    title: "Modernizing Legacy Enterprise Systems Without Breaking Production",
-    teaser:
-      "Strangler patterns, idempotent writes, and shipping migrations behind a system that can't go down.",
-  },
-  {
-    slug: "ai-agents-and-internal-workflows",
-    category: "AI Workflows",
-    title: "How AI Agents Change Internal Software Workflows",
-    teaser:
-      "Where retrieval and agents genuinely reduce operational toil — and where they quietly don't.",
-  },
-];
+import { ARTICLES } from "@/content/writing";
 
 /**
  * Section 6 — engineering writing preview. A quiet, editorial list of
- * planned notes that signals how Sravan thinks about systems. Marked as
- * drafts; the writing system itself comes later.
+ * published notes that signals how Sravan thinks about systems. Driven
+ * by the shared writing source so titles and slugs match /writing.
  */
 export function WritingPreview() {
   return (
@@ -47,7 +16,7 @@ export function WritingPreview() {
       </Reveal>
 
       <ul className="mt-12 border-t border-border">
-        {NOTES.map((note) => (
+        {ARTICLES.map((note) => (
           <li key={note.slug}>
             <Reveal mode="rise">
               <a
@@ -58,7 +27,9 @@ export function WritingPreview() {
                   <MonoLabel className="text-accent-strong">
                     {note.category}
                   </MonoLabel>
-                  <MonoLabel className="text-text-faint">Draft</MonoLabel>
+                  <MonoLabel className="text-text-faint">
+                    {note.readingTime}
+                  </MonoLabel>
                 </div>
                 <div>
                   <Heading
