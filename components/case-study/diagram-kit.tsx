@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 /*
-  Shared SVG primitives for LuminTrack's system diagrams. Abstract,
+  Shared SVG primitives for case-study system diagrams. Abstract,
   monochrome-with-accent visuals consistent with the homepage glyphs —
   boxes, wires, and nodes on a near-black panel. No real screenshots.
 */

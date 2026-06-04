@@ -1,4 +1,4 @@
-import { Box, Wire, Caption, DiagramFrame } from "./diagram-kit";
+import { Box, Wire, Caption, DiagramFrame } from "@/components/case-study/diagram-kit";
 
 /**
  * System architecture: client over REST + WebSocket, an API layer in

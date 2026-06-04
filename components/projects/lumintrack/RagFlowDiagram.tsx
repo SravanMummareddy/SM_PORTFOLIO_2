@@ -1,4 +1,4 @@
-import { Box, Wire, Caption, DiagramFrame } from "./diagram-kit";
+import { Box, Wire, Caption, DiagramFrame } from "@/components/case-study/diagram-kit";
 
 /**
  * RAG document retrieval. Uploaded documents are chunked and embedded

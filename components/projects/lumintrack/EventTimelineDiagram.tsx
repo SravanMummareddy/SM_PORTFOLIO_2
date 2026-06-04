@@ -1,4 +1,4 @@
-import { Box, Wire, Caption, C, DiagramFrame } from "./diagram-kit";
+import { Box, Wire, Caption, C, DiagramFrame } from "@/components/case-study/diagram-kit";
 
 /**
  * The event-sourced activity timeline. Every action appends an

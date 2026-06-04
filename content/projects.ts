@@ -53,7 +53,7 @@ export const PROJECTS: ProjectMeta[] = [
       "An operations platform for a real manufacturing business — invoices, payments, ledgers, and inventory modeled as one transactional, auditable system.",
     focus: ["Ledger consistency", "Payment allocation", "Inventory sync", "Audit logging"],
     glyph: "ledger",
-    hasCaseStudy: false,
+    hasCaseStudy: true,
   },
   {
     index: "04",
