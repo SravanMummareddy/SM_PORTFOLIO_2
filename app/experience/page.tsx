@@ -47,12 +47,15 @@ export default function ExperiencePage() {
         <Reveal mode="rise" className="mx-auto max-w-xl">
           <Heading level={2}>The work these systems led to.</Heading>
           <Text className="mx-auto mt-5 max-w-md">
-            The engineering above is where the projects come from. Explore the
-            systems in detail, or get in touch.
+            The engineering above is where the projects come from. See the
+            systems in detail, read how I work, or get in touch.
           </Text>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button href="/projects" variant="secondary">
               View projects
+            </Button>
+            <Button href="/about" variant="ghost">
+              About me
             </Button>
             <Button href={CONTACT.mailto} variant="ghost">
               Get in touch

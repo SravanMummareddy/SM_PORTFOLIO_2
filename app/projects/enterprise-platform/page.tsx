@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Text, MonoLabel, Heading } from "@/components/ui/Typography";
 import { Card } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
-import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import {
   CaseStudyHero,
+  CaseStudyNav,
   CaseStudySection,
   Figure,
   DefinitionList,
@@ -362,20 +361,7 @@ export default function EnterprisePlatformCaseStudy() {
         </div>
       </CaseStudySection>
 
-      <Section divider className="text-center">
-        <Reveal mode="rise" className="mx-auto max-w-xl">
-          <Heading level={2}>More systems to explore.</Heading>
-          <Text className="mx-auto mt-5 max-w-md">
-            Every project here carries a complete case study, from system model
-            to scaling decisions. See the full set.
-          </Text>
-          <div className="mt-8 flex justify-center">
-            <Button href="/projects" variant="secondary">
-              All projects
-            </Button>
-          </div>
-        </Reveal>
-      </Section>
+      <CaseStudyNav currentSlug="enterprise-platform" />
     </>
   );
 }

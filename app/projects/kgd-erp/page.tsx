@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Text, MonoLabel, Heading } from "@/components/ui/Typography";
 import { Card } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
-import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import {
   CaseStudyHero,
+  CaseStudyNav,
   CaseStudySection,
   Figure,
   DefinitionList,
@@ -339,20 +338,7 @@ export default function KgdErpCaseStudy() {
         </div>
       </CaseStudySection>
 
-      <Section divider className="text-center">
-        <Reveal mode="rise" className="mx-auto max-w-xl">
-          <Heading level={2}>See the rest of the work.</Heading>
-          <Text className="mx-auto mt-5 max-w-md">
-            Each project is documented end to end — problem, architecture,
-            tradeoffs, and scaling. Browse them all.
-          </Text>
-          <div className="mt-8 flex justify-center">
-            <Button href="/projects" variant="secondary">
-              All projects
-            </Button>
-          </div>
-        </Reveal>
-      </Section>
+      <CaseStudyNav currentSlug="kgd-erp" />
     </>
   );
 }

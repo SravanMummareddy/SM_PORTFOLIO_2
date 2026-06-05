@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Section } from "@/components/ui/Section";
-import { Heading, Text } from "@/components/ui/Typography";
-import { Button } from "@/components/ui/Button";
-import { Reveal } from "@/components/motion/Reveal";
 import {
   ArticleHero,
   Prose,
@@ -12,6 +8,7 @@ import {
   ProseList,
   Callout,
 } from "@/components/writing/article-kit";
+import { ArticleNav } from "@/components/writing/ArticleNav";
 import { getArticle } from "@/content/writing";
 
 const meta = getArticle("state-machines-workflows");
@@ -121,20 +118,7 @@ export default function StateMachinesArticle() {
         </Callout>
       </Prose>
 
-      <Section divider className="text-center">
-        <Reveal mode="rise" className="mx-auto max-w-xl">
-          <Heading level={2}>More notes on systems.</Heading>
-          <Text className="mx-auto mt-5 max-w-md">
-            Short, architecture-focused writing on building and modernizing real
-            software.
-          </Text>
-          <div className="mt-8 flex justify-center">
-            <Button href="/writing" variant="secondary">
-              All writing
-            </Button>
-          </div>
-        </Reveal>
-      </Section>
+      <ArticleNav currentSlug="state-machines-workflows" />
     </>
   );
 }

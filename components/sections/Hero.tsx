@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { Display, Lead, Eyebrow, MonoLabel } from "@/components/ui/Typography";
+import { Display, Lead, MonoLabel } from "@/components/ui/Typography";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { SystemGraph } from "@/components/three/SystemGraph";
 import { ScrollCue } from "./ScrollCue";
@@ -33,10 +33,16 @@ export function Hero() {
         <Stagger trigger="mount" delay={0.55} gap={0.16} className="max-w-3xl">
           <StaggerItem>
             <div className="mb-7">
-              <Eyebrow marker className="block">
-                Sravan Mummareddy
-              </Eyebrow>
-              <MonoLabel className="mt-2 block text-text-tertiary">
+              <span className="inline-flex items-center gap-2.5">
+                <span
+                  aria-hidden
+                  className="size-2 rounded-full bg-accent shadow-[0_0_10px_var(--accent-glow)]"
+                />
+                <span className="text-base font-medium tracking-tight text-text-primary">
+                  Sravan Mummareddy
+                </span>
+              </span>
+              <MonoLabel className="mt-2 block tracking-normal text-text-tertiary">
                 Systems Product Engineer
               </MonoLabel>
             </div>

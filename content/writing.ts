@@ -12,6 +12,12 @@ export interface ArticleMeta {
   /** ISO date the note was published. */
   date: string;
   readingTime: string;
+  /**
+   * The case study this note most directly relates to — a slug in
+   * content/projects.ts. Drives the "related system" cross-link in the
+   * article footer nav so writing connects back to the work it describes.
+   */
+  relatedProject?: string;
 }
 
 export const ARTICLES: ArticleMeta[] = [
@@ -23,6 +29,7 @@ export const ARTICLES: ArticleMeta[] = [
       "Why explicit states and strict transitions beat boolean flags once a workflow has more than three steps.",
     date: "2026-02-18",
     readingTime: "7 min read",
+    relatedProject: "lumintrack",
   },
   {
     slug: "legacy-modernization",
@@ -32,6 +39,7 @@ export const ARTICLES: ArticleMeta[] = [
       "Strangler patterns, idempotent writes, and shipping migrations behind a system that can't go down.",
     date: "2026-03-26",
     readingTime: "8 min read",
+    relatedProject: "enterprise-platform",
   },
   {
     slug: "ai-agents-internal-tools",
@@ -41,6 +49,7 @@ export const ARTICLES: ArticleMeta[] = [
       "Where retrieval and agents genuinely reduce operational toil — and where they quietly don't.",
     date: "2026-05-07",
     readingTime: "6 min read",
+    relatedProject: "lumintrack",
   },
 ];
 
