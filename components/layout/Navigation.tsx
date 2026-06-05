@@ -68,7 +68,7 @@ export function Navigation({
             onClick={onNavigate}
             aria-current={active ? "page" : undefined}
             className={cn(
-              "rounded-control px-3 py-2 text-sm",
+              "relative rounded-control px-3 py-2 text-sm",
               "transition-colors duration-[var(--duration-fast)] ease-[var(--ease-out)]",
               "hover:text-text-primary hover:bg-surface",
               active
@@ -78,6 +78,17 @@ export function Navigation({
             )}
           >
             {link.label}
+            {active ? (
+              <span
+                aria-hidden
+                className={cn(
+                  "absolute rounded-full bg-accent shadow-[0_0_8px_var(--accent-glow)]",
+                  orientation === "horizontal"
+                    ? "inset-x-3 bottom-1 h-[2px]"
+                    : "inset-y-1.5 left-0 w-[2px]",
+                )}
+              />
+            ) : null}
           </a>
         );
       })}

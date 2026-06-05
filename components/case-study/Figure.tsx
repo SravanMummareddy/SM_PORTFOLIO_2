@@ -30,7 +30,35 @@ export function Figure({
     <ScrollReveal className={className}>
       <figure>
         <Card variant="glass" padding="none" className="overflow-hidden">
-          <div className={cn("w-full p-6 sm:p-8", aspect)}>{children}</div>
+          {/* On phones the diagram is rendered at a minimum legible width
+              inside a horizontal scroller, so the fixed-viewBox SVG labels
+              stay readable instead of shrinking to ~4px. At sm+ the min-width
+              resets and the affordances hide — desktop is unchanged. */}
+          <div className="relative">
+            <div
+              tabIndex={0}
+              aria-label={
+                label
+                  ? `${label} diagram — scroll horizontally to explore`
+                  : "Diagram — scroll horizontally to explore"
+              }
+              className="overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+              <div className={cn("w-full min-w-[36rem] p-6 sm:min-w-0 sm:p-8", aspect)}>
+                {children}
+              </div>
+            </div>
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-y-0 right-0 w-14 bg-gradient-to-l from-surface to-transparent sm:hidden"
+            />
+            <span
+              aria-hidden
+              className="pointer-events-none absolute bottom-3 right-3 rounded-full border border-border bg-bg/70 px-2 py-0.5 font-mono text-[0.65rem] uppercase tracking-[0.12em] text-text-tertiary sm:hidden"
+            >
+              Drag →
+            </span>
+          </div>
           {label || caption ? (
             <figcaption className="flex flex-col gap-1.5 border-t border-border px-6 py-4 sm:px-8">
               {label ? (
