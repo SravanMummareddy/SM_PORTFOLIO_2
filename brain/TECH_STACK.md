@@ -174,11 +174,11 @@ Do not create meaningless 3D scenes.
 
 ## Drei
 
-Use helpers for:
+Status: REMOVED.
 
-- cameras
-- controls
-- optimization
+`@react-three/drei` was dropped to trim the bundle — the system graph uses plain
+React Three Fiber + Three.js directly. Note: `three` therefore needs its own
+`@types/three` devDependency (drei used to provide it transitively).
 
 ---
 
@@ -201,17 +201,18 @@ Never:
 
 # Content System
 
-Future:
+Status: BUILT.
 
-MDX-based writing system.
+MDX-based writing system is implemented.
 
-Used for:
+- Blog posts / notes: one `.mdx` file each in `content/writing/` (frontmatter +
+  markdown). `content/writing.ts` reads the folder at build time; the single
+  dynamic route `app/writing/[slug]/page.tsx` renders them.
+- Case studies: deliberately remain hand-built React pages (bespoke SVG diagrams).
+- All other content lives in source-of-truth modules under `content/`
+  (`projects.ts`, `experience.ts`, `systems.ts`, `contact.ts`).
 
-- engineering blogs
-- technical notes
-- case studies
-
-Content should live separately from UI.
+Content lives separately from UI. See `MAINTAINING.md` for how to edit each.
 
 ---
 

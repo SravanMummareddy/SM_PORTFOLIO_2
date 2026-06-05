@@ -77,14 +77,22 @@ Deep case study
 /projects/edgestack
 Deep case study
 
+/systems
+Systems philosophy — the 3 engineering pillars (added)
+
+/experience
+Engineering journey / work history (added)
+
 /writing
 Engineering writing
 
 /writing/[article]
-Technical article
+Technical article (MDX, single dynamic route)
 
 /about
 Optional deeper personal story
+
+(See README.md + MAINTAINING.md for the as-built structure and how to edit it.)
 
 ---
 

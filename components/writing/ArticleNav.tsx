@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
 import { Eyebrow, MonoLabel } from "@/components/ui/Typography";
@@ -94,12 +95,12 @@ export function ArticleNav({ currentSlug }: { currentSlug: string }) {
             </span>
           </a>
         ) : null}
-        <a
+        <Link
           href="/writing"
           className="font-mono text-[0.8125rem] uppercase tracking-[0.12em] text-text-tertiary transition-colors hover:text-text-secondary"
         >
           All writing
-        </a>
+        </Link>
       </Reveal>
     </Section>
   );

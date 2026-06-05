@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Display, Lead, Heading, Text, MonoLabel } from "@/components/ui/Typography";
@@ -24,7 +25,7 @@ export function ArticleHero({
         className="pointer-events-none absolute inset-0 -z-10 bg-grid mask-radial-fade opacity-[0.5]"
       />
       <Reveal mode="rise">
-        <a
+        <Link
           href="/writing"
           className="group inline-flex items-center gap-2 font-mono text-[0.75rem] uppercase tracking-[0.14em] text-text-tertiary transition-colors hover:text-text-secondary"
         >
@@ -35,7 +36,7 @@ export function ArticleHero({
             ←
           </span>
           All writing
-        </a>
+        </Link>
       </Reveal>
 
       <Reveal mode="rise" delay={0.05} className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -120,7 +121,9 @@ export function Callout({
       <MonoLabel className="text-accent-strong uppercase tracking-[0.12em] text-[0.7rem]">
         {label}
       </MonoLabel>
-      <Text className="mt-3 text-text-secondary">{children}</Text>
+      {/* div (not <Text>/<p>) so MDX block children — paragraphs, lists —
+          nest validly when a callout is authored in a post. */}
+      <div className="mt-3 space-y-4 text-text-secondary">{children}</div>
     </aside>
   );
 }

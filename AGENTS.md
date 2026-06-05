@@ -12,6 +12,16 @@ Repository:
 
 Sravan Mummareddy Engineering Portfolio
 
+---
+
+## Start here (current state)
+
+Before diving in, read **`README.md`** (the as-built map) and **`MAINTAINING.md`**
+(where to edit anything: blog posts are MDX in `content/writing/`, all other content
+lives in `content/`). The design intent below in `brain/` still governs look and voice.
+
+---
+
 This repository is not a normal portfolio website.
 
 It is a premium engineering product demonstrating:

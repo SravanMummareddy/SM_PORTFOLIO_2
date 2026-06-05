@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sravan Mummareddy — Engineering Portfolio
 
-## Getting Started
+A premium engineering portfolio for **Sravan Mummareddy, Systems Product Engineer** —
+backend architecture, operational platforms, and AI-assisted systems. It is built as a
+product, not a template: source-of-truth content modules, reusable primitives, purposeful
+motion, and bespoke system diagrams.
 
-First, run the development server:
+> **Coming back after a break? Read [`MAINTAINING.md`](./MAINTAINING.md).** It's the
+> practical "I want to change X → edit this file" guide (add a blog post, add a project,
+> update contact info, etc.). This README is the high-level map.
+
+---
+
+## Tech stack
+
+| Concern | Choice |
+|---|---|
+| Framework | **Next.js 16** (App Router, Turbopack), React 19 |
+| Language | TypeScript (strict) |
+| Styling | Tailwind CSS v4 (CSS-first `@theme` tokens in `app/globals.css`) |
+| Motion | Framer Motion, GSAP + ScrollTrigger, Lenis (smooth scroll) |
+| 3D | React Three Fiber + Three.js (the homepage system graph) |
+| Writing | **MDX** posts (`next-mdx-remote` + `gray-matter`) |
+| Share cards | `next/og` (`ImageResponse`) — generated at build |
+| Hosting | Vercel (static / SSG) |
+
+## Quick start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build (all pages prerender static)
+npm run lint     # eslint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Node 20+ recommended.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/                     # routes (App Router)
+  page.tsx               # homepage (composed from components/sections/*)
+  layout.tsx             # root layout + site metadata
+  globals.css            # design tokens (@theme) + Tailwind + custom utilities
+  sitemap.ts, robots.ts  # SEO, derived from content modules
+  opengraph-image.tsx    # site-wide share card
+  _og/                   # Geist TTFs used by the OG renderer
+  about/  experience/  systems/  styleguide/
+  projects/              # index + 5 case studies (each w/ its own opengraph-image)
+  writing/               # index + [slug] (renders MDX) + [slug]/opengraph-image
 
-## Learn More
+content/                 # ★ SOURCE OF TRUTH — edit content here, not in pages
+  projects.ts            # project list + metadata
+  experience.ts          # work history timeline
+  systems.ts             # the 3 engineering "pillars"
+  contact.ts             # email, GitHub, LinkedIn, résumé
+  writing.ts             # MDX loader (builds the article list from files)
+  writing/*.mdx          # ★ blog posts — one file per post
 
-To learn more about Next.js, take a look at the following resources:
+components/
+  ui/                    # primitives: Typography, Button, Card, Section, Container
+  layout/                # Header, Footer, Navigation (active-tab + homepage scroll-spy)
+  sections/              # homepage sections (Hero, FeaturedWork, …)
+  motion/                # Reveal, Stagger, ScrollReveal, SmoothScroll (Lenis), …
+  three/                 # SystemGraph (lazy WebGL) + SVG fallback
+  case-study/            # case-study primitives + the SVG diagram-kit
+  projects/<slug>/       # bespoke diagrams per case study
+  experience/  systems/  writing/   # feature-specific components
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+lib/                     # site.ts (SITE_URL), og.tsx (share renderer), motion/gsap helpers, utils
+public/                  # résumé PDF + static assets
+brain/                   # design source-of-truth (philosophy, identity, motion, recruiter psych)
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## How content flows (the important idea)
 
-## Deploy on Vercel
+Everything you'd want to change lives in **`content/`**. The listings, navigation, sitemap,
+and share images all derive from those modules, so editing one entry propagates everywhere:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Projects** → `content/projects.ts` drives the homepage previews, `/projects` index, the
+  `/systems` "related work", and the case-study pages.
+- **Writing** → drop a `content/writing/<slug>.mdx` file; `content/writing.ts` reads the
+  folder at build time and the index/homepage/prev-next/sitemap/OG update themselves.
+- **Experience / Systems / Contact** → `experience.ts` / `systems.ts` / `contact.ts`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Full step-by-step instructions for each: **[`MAINTAINING.md`](./MAINTAINING.md)**.
+
+## Routes
+
+`/` · `/projects` (+ 5 case studies) · `/systems` · `/experience` · `/writing` (+ MDX posts)
+· `/about` · `/styleguide` (internal, `noindex`).
+
+## Design docs
+
+The `brain/` folder is the **design source of truth** — identity, vision, design system,
+motion system, storytelling, recruiter psychology. Read these before changing the look or
+voice. `AGENTS.md` / `CLAUDE.md` are instructions for AI coding agents working in this repo.
+
+## Deployment
+
+Hosted on Vercel; pushing to the connected branch triggers a rebuild. Set
+**`NEXT_PUBLIC_SITE_URL`** to the production domain so canonical/OG/sitemap URLs are absolute
+(falls back to a `*.vercel.app` placeholder — see `lib/site.ts`).
+
+## Dependency audit note
+
+`npm audit` reports **2 moderate** advisories for `postcss < 8.5.10`. This is a transitive
+dependency **bundled inside Next.js itself** (`next → postcss@8.4.31`); our own
+`@tailwindcss/postcss` already uses a patched 8.5.x. The only offered "fix"
+(`npm audit fix --force`) downgrades Next to v9 — do **not** run it. The advisory is a
+build-time CSS-stringifier XSS that requires processing untrusted CSS, which never happens in
+this static build, so real-world risk is negligible. It clears itself when Next bumps its
+bundled postcss. **Action: none.**
