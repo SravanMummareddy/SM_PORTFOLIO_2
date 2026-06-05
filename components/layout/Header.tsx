@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Navigation } from "./Navigation";
+import { useHomeActiveHref } from "./useHomeActiveHref";
 import { DURATION, EASE } from "@/lib/motion";
 
 function Wordmark() {
@@ -36,6 +37,9 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const reduceMotion = useReducedMotion();
+  // On the homepage, track which section is in view so the nav underline
+  // follows it. `undefined` everywhere else → normal pathname-based active.
+  const activeHref = useHomeActiveHref();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -67,7 +71,7 @@ export function Header() {
             <Wordmark />
 
             <div className="hidden items-center gap-2 md:flex">
-              <Navigation />
+              <Navigation activeHref={activeHref} />
               <span aria-hidden className="mx-2 h-5 w-px bg-border" />
               <Button href="/about#contact" variant="secondary" size="sm">
                 Contact
@@ -101,6 +105,7 @@ export function Header() {
               <div className="flex flex-col gap-2 py-6">
                 <Navigation
                   orientation="vertical"
+                  activeHref={activeHref}
                   onNavigate={() => setMenuOpen(false)}
                 />
                 <Button

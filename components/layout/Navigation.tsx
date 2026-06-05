@@ -22,6 +22,12 @@ interface NavigationProps {
   orientation?: "horizontal" | "vertical";
   links?: readonly NavLink[];
   onNavigate?: () => void;
+  /**
+   * Override which link is marked active. When provided (e.g. the homepage
+   * scroll-spy), the link whose href equals this value is active and the
+   * pathname is ignored; `undefined` falls back to pathname-based matching.
+   */
+  activeHref?: string;
 }
 
 /**
@@ -45,6 +51,7 @@ export function Navigation({
   orientation = "horizontal",
   links = NAV_LINKS,
   onNavigate,
+  activeHref,
 }: NavigationProps) {
   const pathname = usePathname() ?? "/";
 
@@ -60,7 +67,10 @@ export function Navigation({
       )}
     >
       {links.map((link) => {
-        const active = isActive(pathname, link.href);
+        const active =
+          activeHref !== undefined
+            ? link.href === activeHref
+            : isActive(pathname, link.href);
         return (
           <a
             key={link.href}
