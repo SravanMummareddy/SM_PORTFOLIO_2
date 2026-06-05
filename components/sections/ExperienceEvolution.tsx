@@ -17,8 +17,9 @@ export function ExperienceEvolution() {
         <Heading level={2}>How the work evolved.</Heading>
         <Lead className="mt-6">
           Each role was a different class of system — from real-time product
-          systems to enterprise SaaS, healthcare infrastructure, and
-          AI-assisted operational platforms. Each shaped how the next was built.
+          systems to enterprise SaaS, healthcare infrastructure, utility-scale
+          modernization, and AI-assisted operational platforms. Each shaped how
+          the next was built.
         </Lead>
       </Reveal>
 

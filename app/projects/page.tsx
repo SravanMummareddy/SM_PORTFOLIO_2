@@ -39,7 +39,8 @@ export default function ProjectsIndex() {
           <Lead className="mt-7 max-w-2xl">
             Each project is a different systems problem — workflow intelligence,
             platform modernization, operational software, and decision
-            analytics. Deep case studies are being written one at a time.
+            analytics. Every one has a full case study breaking down its
+            architecture, tradeoffs, and how it would scale.
           </Lead>
         </Reveal>
       </Section>

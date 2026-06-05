@@ -292,8 +292,8 @@ export default function LuminTrackCaseStudy() {
         <Reveal mode="rise" className="mx-auto max-w-xl">
           <Heading level={2}>Explore the rest of the work.</Heading>
           <Text className="mx-auto mt-5 max-w-md">
-            More case studies are being written. The index has the full set of
-            systems and where each one stands.
+            Five systems, each with a full breakdown — architecture, tradeoffs,
+            and how it scales. The index has them all.
           </Text>
           <div className="mt-8 flex justify-center">
             <Button href="/projects" variant="secondary">

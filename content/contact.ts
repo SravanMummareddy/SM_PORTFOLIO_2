@@ -4,9 +4,9 @@
  * page so the email, social links, and résumé location never drift.
  */
 export const CONTACT = {
-  email: "harisravan9@gmail.com",
+  email: "mummareddysravankumar@gmail.com",
   /** Ready-to-use mailto href for "Get in touch" CTAs. */
-  mailto: "mailto:harisravan9@gmail.com",
+  mailto: "mailto:mummareddysravankumar@gmail.com",
   github: "https://github.com/SravanMummareddy",
   linkedin: "https://www.linkedin.com/in/smummareddy",
   /**

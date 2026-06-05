@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { Display, Lead, Eyebrow } from "@/components/ui/Typography";
+import { Display, Lead, Eyebrow, MonoLabel } from "@/components/ui/Typography";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { SystemGraph } from "@/components/three/SystemGraph";
 import { ScrollCue } from "./ScrollCue";
@@ -32,9 +32,14 @@ export function Hero() {
             headline resolves into focus → lead → CTA. */}
         <Stagger trigger="mount" delay={0.55} gap={0.16} className="max-w-3xl">
           <StaggerItem>
-            <Eyebrow marker className="mb-7 block">
-              Systems Product Engineer
-            </Eyebrow>
+            <div className="mb-7">
+              <Eyebrow marker className="block">
+                Sravan Mummareddy
+              </Eyebrow>
+              <MonoLabel className="mt-2 block text-text-tertiary">
+                Systems Product Engineer
+              </MonoLabel>
+            </div>
           </StaggerItem>
           <StaggerItem mode="resolve">
             <Display>
