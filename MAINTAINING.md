@@ -25,7 +25,7 @@ To publish any change: save → commit → push. Vercel rebuilds and deploys aut
 | Edit nav links | `components/layout/Navigation.tsx` (`NAV_LINKS`) |
 | Change colors / fonts / spacing tokens | `app/globals.css` (`:root` + `@theme`) |
 | Edit the share-card (OpenGraph) look | `lib/og.tsx` |
-| Set the production domain | env var `NEXT_PUBLIC_SITE_URL` (see `lib/site.ts`) |
+| Set a custom domain origin | env var `NEXT_PUBLIC_SITE_URL` (Vercel URL auto-detects; see `lib/site.ts`) |
 | Change page `<title>` / SEO description | `metadata` in the relevant `app/.../page.tsx` |
 
 ---
@@ -172,8 +172,9 @@ propagates site-wide. Honor the design intent in `brain/DESIGN_SYSTEM.md` and
 
 ## 🚀 Deploy
 
-Push to the connected branch → Vercel builds and deploys. **One-time:** set
-`NEXT_PUBLIC_SITE_URL` to the production domain in Vercel's environment variables.
+Push to the connected branch → Vercel builds and deploys. The site auto-uses its Vercel
+production URL for canonical/OG/sitemap (no setup). **When you add a custom domain,** set
+`NEXT_PUBLIC_SITE_URL` to it in Vercel's environment variables to override.
 
 ---
 

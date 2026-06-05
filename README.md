@@ -98,9 +98,10 @@ voice. `AGENTS.md` / `CLAUDE.md` are instructions for AI coding agents working i
 
 ## Deployment
 
-Hosted on Vercel; pushing to the connected branch triggers a rebuild. Set
-**`NEXT_PUBLIC_SITE_URL`** to the production domain so canonical/OG/sitemap URLs are absolute
-(falls back to a `*.vercel.app` placeholder — see `lib/site.ts`).
+Hosted on Vercel; pushing to the connected branch triggers a rebuild. The canonical origin
+(`lib/site.ts`) **auto-detects the Vercel production URL** via `VERCEL_PROJECT_PRODUCTION_URL`,
+so no config is needed for the `*.vercel.app` URL. **When you add a custom domain,** set
+**`NEXT_PUBLIC_SITE_URL`** to it in Vercel's env vars to override.
 
 ## Dependency audit note
 
