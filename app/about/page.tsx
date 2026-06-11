@@ -87,11 +87,73 @@ export default function AboutPage() {
         </Reveal>
         <Reveal mode="rise" delay={0.15}>
           <Lead className="mt-8 max-w-2xl">
-            I build scalable backend systems and intelligent operational
-            platforms — the kind that model real work and stay reliable under
-            it. Backend depth, product taste, and AI used only where it earns
-            its place.
+            I&apos;m a backend-focused engineer drawn to the unglamorous,
+            load-bearing parts of software — the data models, the migrations,
+            the reliability machinery. Across healthcare imaging, enterprise
+            SaaS, and utility-scale platforms, the instinct has stayed the
+            same: model the real work honestly, then keep it correct under load.
           </Lead>
+        </Reveal>
+
+        {/* Recruiter identity card — status, location, current role, quick contact */}
+        <Reveal mode="rise" delay={0.25}>
+          <div className="mt-10 max-w-2xl border-t border-border pt-8">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+              {CONTACT.openToWork ? (
+                <span className="inline-flex items-center gap-2 rounded-control border border-border px-3 py-1.5 font-mono text-[0.75rem] tracking-[0.04em] text-text-secondary">
+                  <span
+                    aria-hidden
+                    className="size-2 rounded-full bg-accent shadow-[0_0_8px_var(--accent-glow)]"
+                  />
+                  {CONTACT.availability}
+                </span>
+              ) : null}
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                <MonoLabel className="text-text-tertiary">
+                  {CONTACT.location}
+                </MonoLabel>
+                <span aria-hidden className="text-text-faint">
+                  ·
+                </span>
+                <MonoLabel className="text-text-tertiary">
+                  {CONTACT.currentRole}
+                </MonoLabel>
+              </div>
+            </div>
+
+            <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+              <a
+                href={CONTACT.mailto}
+                className="text-text-secondary transition-colors hover:text-text-primary"
+              >
+                Email
+              </a>
+              <a
+                href={CONTACT.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-text-secondary transition-colors hover:text-text-primary"
+              >
+                LinkedIn
+              </a>
+              <a
+                href={CONTACT.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-text-secondary transition-colors hover:text-text-primary"
+              >
+                GitHub
+              </a>
+              <a
+                href={CONTACT.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-text-secondary transition-colors hover:text-text-primary"
+              >
+                Résumé ↗
+              </a>
+            </div>
+          </div>
         </Reveal>
       </Section>
 

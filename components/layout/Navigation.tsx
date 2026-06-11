@@ -11,8 +11,8 @@ export interface NavLink {
 /** Minimal nav, per PORTFOLIO_ARCHITECTURE.md. No mega-menus. */
 export const NAV_LINKS: readonly NavLink[] = [
   { label: "Work", href: "/projects" },
-  { label: "Systems", href: "/systems" },
   { label: "Experience", href: "/experience" },
+  { label: "Systems", href: "/systems" },
   { label: "Writing", href: "/writing" },
   { label: "About", href: "/about" },
 ] as const;

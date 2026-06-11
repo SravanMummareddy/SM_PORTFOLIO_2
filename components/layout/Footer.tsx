@@ -62,7 +62,9 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col gap-4 border-t border-border py-8 sm:flex-row sm:items-center sm:justify-between">
-          <Eyebrow marker>Available for systems work</Eyebrow>
+          <Eyebrow marker>
+            {CONTACT.openToWork ? CONTACT.availability : "Engineering portfolio"}
+          </Eyebrow>
           <Text tone="tertiary" className="text-xs font-mono" as="span">
             © {year} Sravan Mummareddy
           </Text>
